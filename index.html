@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Breach Crisis Management System</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f4f6f9;
+}
+
+header{
+background:#2c3e50;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav{
+background:#34495e;
+padding:10px;
+text-align:center;
+}
+
+nav button{
+padding:10px 18px;
+margin:5px;
+border:none;
+background:white;
+cursor:pointer;
+font-size:14px;
+border-radius:4px;
+}
+
+nav button:hover{
+background:#ddd;
+}
+
+.content{
+padding:20px;
+}
+
+.hidden{
+display:none;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:10px;
+display:inline-block;
+width:220px;
+border-radius:6px;
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+textarea{
+width:60%;
+height:120px;
+padding:10px;
+font-size:14px;
+}
+
+button.action{
+padding:10px 15px;
+border:none;
+background:#2c3e50;
+color:white;
+cursor:pointer;
+border-radius:4px;
+}
+
+button.action:hover{
+background:#1a252f;
+}
+
+ul{
+background:white;
+padding:20px;
+border-radius:6px;
+width:60%;
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Data Breach Crisis Management System</h1>
+<p>PR and Recovery Management after Security Breach</p>
+</header>
+
+
+<nav>
+<button onclick="showSection('dashboard')">Dashboard</button>
+<button onclick="showSection('incident')">Incident Report</button>
+<button onclick="showSection('pr')">PR Communication</button>
+<button onclick="showSection('recovery')">Recovery Status</button>
+</nav>
+
+
+<section id="dashboard" class="content">
+
+<h2>Dashboard</h2>
+
+<div class="card">
+<h3>Breach Status</h3>
+<p id="breachStatus">Detected</p>
+</div>
+
+<div class="card">
+<h3>Affected Users</h3>
+<p>15,230</p>
+</div>
+
+<div class="card">
+<h3>Severity Level</h3>
+<p>High</p>
+</div>
+
+<div class="card">
+<h3>Response Progress</h3>
+<p id="progress">45%</p>
+</div>
+
+</section>
+
+
+
+<section id="incident" class="content hidden">
+
+<h2>Incident Report</h2>
+
+<p><b>Date of Breach:</b> 12 March 2026</p>
+<p><b>Type:</b> Unauthorized Database Access</p>
+<p><b>Affected Systems:</b> Customer Information Database</p>
+
+<p>
+Initial investigation revealed that attackers exploited a vulnerability
+in outdated authentication software to gain unauthorized access to
+sensitive customer data. The cybersecurity team immediately initiated
+containment procedures and began a full system audit.
+</p>
+
+</section>
+
+
+
+<section id="pr" class="content hidden">
+
+<h2>Public Relations Communication</h2>
+
+<p>Draft customer announcement:</p>
+
+<textarea id="announcement">
+We regret to inform our customers that a security breach occurred in our system. 
+Our cybersecurity team is actively investigating the issue and taking all necessary 
+steps to secure our systems and protect user data. We sincerely apologize for 
+the inconvenience caused.
+</textarea>
+
+<br><br>
+
+<button class="action" onclick="publishAnnouncement()">Publish Announcement</button>
+
+<p id="published"></p>
+
+</section>
+
+
+
+<section id="recovery" class="content hidden">
+
+<h2>Recovery Monitoring</h2>
+
+<ul>
+<li>Security audit completed</li>
+<li>Password reset required for all users</li>
+<li>Multi-factor authentication enabled</li>
+<li>Security patches installed</li>
+<li>24/7 monitoring system activated</li>
+</ul>
+
+<br>
+
+<button class="action" onclick="updateProgress()">Update Recovery Progress</button>
+
+</section>
+
+
+
+<script>
+
+function showSection(sectionId)
+{
+let sections=document.querySelectorAll(".content");
+
+sections.forEach(function(section)
+{
+section.classList.add("hidden");
+});
+
+document.getElementById(sectionId).classList.remove("hidden");
+}
+
+
+
+function publishAnnouncement()
+{
+let text=document.getElementById("announcement").value;
+
+document.getElementById("published").innerHTML=
+"<b>Announcement Published:</b><br><br>"+text;
+}
+
+
+
+function updateProgress()
+{
+document.getElementById("progress").innerText="80%";
+
+document.getElementById("breachStatus").innerText="Recovery In Progress";
+
+alert("Recovery progress updated.");
+}
+
+</script>
+
+</body>
+</html>
