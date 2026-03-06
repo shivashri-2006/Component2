@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Data Breach Crisis Management System</title>
+<title>Cyber Crisis Management System</title>
 
 <style>
 
 body{
-font-family: Arial, sans-serif;
+font-family: Arial;
 margin:0;
-background:#f4f6f9;
+background:#eef2f7;
 }
 
 header{
-background:#2c3e50;
+background:#1f2a44;
 color:white;
 padding:20px;
 text-align:center;
 }
 
 nav{
-background:#34495e;
+background:#2f3e5c;
 padding:10px;
 text-align:center;
 }
@@ -28,9 +28,8 @@ nav button{
 padding:10px 18px;
 margin:5px;
 border:none;
-background:white;
 cursor:pointer;
-font-size:14px;
+background:white;
 border-radius:4px;
 }
 
@@ -53,36 +52,65 @@ margin:10px;
 display:inline-block;
 width:220px;
 border-radius:6px;
-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+box-shadow:0 3px 8px rgba(0,0,0,0.2);
 text-align:center;
+}
+
+.progressBar{
+width:300px;
+height:20px;
+background:#ccc;
+border-radius:10px;
+overflow:hidden;
+}
+
+.progress{
+height:20px;
+width:40%;
+background:#27ae60;
 }
 
 textarea{
 width:60%;
 height:120px;
 padding:10px;
-font-size:14px;
 }
 
 button.action{
 padding:10px 15px;
 border:none;
-background:#2c3e50;
+background:#1f2a44;
 color:white;
 cursor:pointer;
 border-radius:4px;
 }
 
 button.action:hover{
-background:#1a252f;
+background:#111a2c;
 }
 
-ul{
+.alert{
+background:#ffdddd;
+padding:15px;
+border-left:6px solid red;
+margin-bottom:20px;
+}
+
+.checklist label{
+display:block;
+margin:8px 0;
+}
+
+.popup{
+position:fixed;
+top:30%;
+left:35%;
+width:300px;
 background:white;
 padding:20px;
-border-radius:6px;
-width:60%;
-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+display:none;
+text-align:center;
 }
 
 </style>
@@ -92,142 +120,188 @@ box-shadow:0 2px 6px rgba(0,0,0,0.2);
 <body>
 
 <header>
-<h1>Data Breach Crisis Management System</h1>
-<p>PR and Recovery Management after Security Breach</p>
+<h1>Cyber Crisis Management System</h1>
+<p>PR & Recovery after Data Breach</p>
 </header>
 
 
 <nav>
 <button onclick="showSection('dashboard')">Dashboard</button>
-<button onclick="showSection('incident')">Incident Report</button>
-<button onclick="showSection('pr')">PR Communication</button>
-<button onclick="showSection('recovery')">Recovery Status</button>
+<button onclick="showSection('incident')">Incident</button>
+<button onclick="showSection('pr')">PR Response</button>
+<button onclick="showSection('recovery')">Recovery</button>
 </nav>
+
+
+<div class="popup" id="popup">
+<h3>⚠ Security Alert</h3>
+<p>Unauthorized access detected!</p>
+<button onclick="closePopup()">Close</button>
+</div>
 
 
 <section id="dashboard" class="content">
 
+<div class="alert">
+<strong>Breach Detected:</strong> Customer database compromised.
+</div>
+
 <h2>Dashboard</h2>
 
 <div class="card">
-<h3>Breach Status</h3>
-<p id="breachStatus">Detected</p>
+<h3>Status</h3>
+<p id="status">Detected</p>
 </div>
 
 <div class="card">
 <h3>Affected Users</h3>
-<p>15,230</p>
+<p id="users">15230</p>
+<button onclick="simulateAttack()">Simulate Increase</button>
 </div>
 
 <div class="card">
-<h3>Severity Level</h3>
+<h3>Severity</h3>
 <p>High</p>
 </div>
 
 <div class="card">
-<h3>Response Progress</h3>
-<p id="progress">45%</p>
+<h3>Recovery Progress</h3>
+
+<div class="progressBar">
+<div class="progress" id="bar"></div>
+</div>
+
+<p id="percent">40%</p>
+
 </div>
 
 </section>
-
 
 
 <section id="incident" class="content hidden">
 
 <h2>Incident Report</h2>
 
-<p><b>Date of Breach:</b> 12 March 2026</p>
-<p><b>Type:</b> Unauthorized Database Access</p>
-<p><b>Affected Systems:</b> Customer Information Database</p>
+<p><b>Date:</b> March 12, 2026</p>
+<p><b>Attack Type:</b> Database breach</p>
+<p><b>Entry Point:</b> Outdated authentication system</p>
 
 <p>
-Initial investigation revealed that attackers exploited a vulnerability
-in outdated authentication software to gain unauthorized access to
-sensitive customer data. The cybersecurity team immediately initiated
-containment procedures and began a full system audit.
+Attackers exploited a software vulnerability and gained
+unauthorized access to customer data including email
+addresses and encrypted passwords.
 </p>
 
-</section>
+<button class="action" onclick="openPopup()">View Alert Simulation</button>
 
+</section>
 
 
 <section id="pr" class="content hidden">
 
-<h2>Public Relations Communication</h2>
+<h2>PR Communication</h2>
 
 <p>Draft customer announcement:</p>
 
-<textarea id="announcement">
-We regret to inform our customers that a security breach occurred in our system. 
-Our cybersecurity team is actively investigating the issue and taking all necessary 
-steps to secure our systems and protect user data. We sincerely apologize for 
-the inconvenience caused.
+<textarea id="message">
+We regret to inform our users that a security breach has occurred.
+Our cybersecurity team is investigating the issue and taking all
+necessary actions to protect user data.
 </textarea>
 
 <br><br>
 
-<button class="action" onclick="publishAnnouncement()">Publish Announcement</button>
+<button class="action" onclick="publish()">Publish Statement</button>
 
-<p id="published"></p>
+<h3 id="output"></h3>
 
 </section>
-
 
 
 <section id="recovery" class="content hidden">
 
-<h2>Recovery Monitoring</h2>
+<h2>Recovery Checklist</h2>
 
-<ul>
-<li>Security audit completed</li>
-<li>Password reset required for all users</li>
-<li>Multi-factor authentication enabled</li>
-<li>Security patches installed</li>
-<li>24/7 monitoring system activated</li>
-</ul>
+<div class="checklist">
 
-<br>
+<label><input type="checkbox" onclick="updateProgress()"> Security audit completed</label>
 
-<button class="action" onclick="updateProgress()">Update Recovery Progress</button>
+<label><input type="checkbox" onclick="updateProgress()"> Password reset for users</label>
+
+<label><input type="checkbox" onclick="updateProgress()"> Multi-factor authentication enabled</label>
+
+<label><input type="checkbox" onclick="updateProgress()"> Security patches installed</label>
+
+<label><input type="checkbox" onclick="updateProgress()"> Monitoring system activated</label>
+
+</div>
 
 </section>
 
 
-
 <script>
 
-function showSection(sectionId)
+function showSection(id)
 {
 let sections=document.querySelectorAll(".content");
 
-sections.forEach(function(section)
+sections.forEach(function(s)
 {
-section.classList.add("hidden");
+s.classList.add("hidden");
 });
 
-document.getElementById(sectionId).classList.remove("hidden");
+document.getElementById(id).classList.remove("hidden");
 }
 
 
 
-function publishAnnouncement()
+function simulateAttack()
 {
-let text=document.getElementById("announcement").value;
+let users=document.getElementById("users");
+let number=parseInt(users.innerText);
 
-document.getElementById("published").innerHTML=
-"<b>Announcement Published:</b><br><br>"+text;
+number+=500;
+
+users.innerText=number;
+}
+
+
+
+function publish()
+{
+let text=document.getElementById("message").value;
+
+document.getElementById("output").innerText="Published Statement: "+text;
 }
 
 
 
 function updateProgress()
 {
-document.getElementById("progress").innerText="80%";
+let checks=document.querySelectorAll(".checklist input:checked");
 
-document.getElementById("breachStatus").innerText="Recovery In Progress";
+let percent=(checks.length/5)*100;
 
-alert("Recovery progress updated.");
+document.getElementById("bar").style.width=percent+"%";
+
+document.getElementById("percent").innerText=percent+"%";
+
+if(percent==100)
+{
+document.getElementById("status").innerText="Recovered";
+}
+}
+
+
+
+function openPopup()
+{
+document.getElementById("popup").style.display="block";
+}
+
+function closePopup()
+{
+document.getElementById("popup").style.display="none";
 }
 
 </script>
